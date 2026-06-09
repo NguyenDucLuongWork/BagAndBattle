@@ -23,3 +23,13 @@ Thumbs.db
 
 # Coverage
 coverage/
+
+# Unity
+Library/
+Temp/
+Logs/
+UserSettings/
+
+*.csproj
+*.sln
+*.user
