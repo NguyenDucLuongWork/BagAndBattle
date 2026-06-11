@@ -1,14 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MonsterEntity : CombatEntity
 {
-    public string MonsterName;
+    public string monsterName;
 
-    public MonsterEntity(
-        string monsterName,
-        int maxHealth)
-        : base(maxHealth)
+ 
+    protected override void Start()
     {
-        MonsterName = monsterName;
+        base.Start(); // Gọi logic đặt máu của lớp cha CombatEntity
+        if (string.IsNullOrEmpty(monsterName)) monsterName = gameObject.name;
     }
 }
