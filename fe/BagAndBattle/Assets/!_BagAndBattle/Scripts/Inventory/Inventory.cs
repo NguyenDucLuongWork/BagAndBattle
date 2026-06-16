@@ -1,7 +1,9 @@
-﻿using System;
+﻿using LgTyLib.Core;
+using System;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+[RequireComponent(typeof(InventoryGridVisual))]
+public class Inventory : BaseSingleton<Inventory>
 {
 
     [Header("Initial size")]
@@ -20,27 +22,34 @@ public class Inventory : MonoBehaviour
     public event Action<StoredObject> OnItemRemoved;
 
     [field:SerializeField]
-    public InventoryGrid Grid { get; private set; }
+    public InventoryGrid grid { get; private set; }
 
-    private void Awake()
+    public InventoryGridVisual inventoryGridVisual { get; private set; }
+
+    protected override void Awake()
     {
-        Grid = new InventoryGrid(startWidth, startHeight);
+        base.Awake();
+        grid = new InventoryGrid(startWidth, startHeight);
 
         if (startWithLockedRegion)
             LockRegionOutside(unlockedWidth, unlockedHeight);
+
+        inventoryGridVisual = GetComponent<InventoryGridVisual>();
+        inventoryGridVisual.ShowGrid(grid);
+
     }
 
     private void LockRegionOutside(int playableW, int playableH)
     {
-        for (int x = 0; x < Grid.width; x++)
-            for (int y = 0; y < Grid.height; y++)
+        for (int x = 0; x < grid.width; x++)
+            for (int y = 0; y < grid.height; y++)
                 if (x >= playableW || y >= playableH)
-                    Grid.GetCell(x, y).state = CellState.Locked;
+                    grid.GetCell(x, y).state = CellState.Disable;
     }
 
     public StoredObject TryPlace(Storable storable, Vector2Int origin, int rotation)
     {
-        var result = PlacementValidator.CanPlace(Grid, storable, origin, rotation);
+        var result = PlacementValidator.CanPlace(grid, storable, origin, rotation);
         if (!result.Success)
         {
             Debug.Log($"[InventoryGridMono] TryPlace failed: {result}");
@@ -54,7 +63,7 @@ public class Inventory : MonoBehaviour
             rotation = rotation
         };
 
-        Grid.Place(obj);
+        grid.Place(obj);
         OnItemPlaced?.Invoke(obj);
         OnCellsChanged?.Invoke();
         return obj;
@@ -62,7 +71,7 @@ public class Inventory : MonoBehaviour
 
     public bool TryMove(StoredObject obj, Vector2Int newOrigin, int newRotation)
     {
-        var result = PlacementValidator.CanPlace(Grid, obj.storable, newOrigin, newRotation,
+        var result = PlacementValidator.CanPlace(grid, obj.storable, newOrigin, newRotation,
             ignore: obj);
 
         if (!result.Success)
@@ -71,35 +80,35 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
-        Grid.Remove(obj);
+        grid.Remove(obj);
         obj.origin = newOrigin;
         obj.rotation = newRotation;
-        Grid.Place(obj);
+        grid.Place(obj);
 
         OnCellsChanged?.Invoke();
         return true;
     }
     public void Remove(StoredObject obj)
     {
-        Grid.Remove(obj);
+        grid.Remove(obj);
         OnItemRemoved?.Invoke(obj);
         OnCellsChanged?.Invoke();
     }
 
     internal void RaiseCellsChanged() => OnCellsChanged?.Invoke();
 
-    public InventoryGrid GetSaveData() => Grid;
+    public InventoryGrid GetSaveData() => grid;
 
     public void LoadFrom(InventoryGrid savedGrid)
     {
-        Grid = savedGrid;
-        Grid.RebuildCells();
+        grid = savedGrid;
+        grid.RebuildCells();
         OnCellsChanged?.Invoke();
     }
 
     public StoredObject GetOccupant(Vector2Int cell) =>
-        Grid.InBounds(cell) ? Grid.GetOccupant(cell.x, cell.y) : null;
+        grid.InBounds(cell) ? grid.GetOccupant(cell.x, cell.y) : null;
 
     public bool IsCellFree(Vector2Int cell) =>
-        Grid.InBounds(cell) && Grid.GetCell(cell).state == CellState.Empty;
+        grid.InBounds(cell) && grid.GetCell(cell).state == CellState.Empty;
 }

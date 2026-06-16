@@ -52,7 +52,7 @@ public static class PlacementValidator
 
             var cell = grid.GetCell(x, y);
 
-            if (cell.state == CellState.Locked)
+            if (cell.state == CellState.Disable)
                 return new PlacementResult(false, FailReason.CellLocked,
                     new Vector2Int(x, y));
 
