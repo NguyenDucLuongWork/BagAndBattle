@@ -23,24 +23,24 @@ public class GridExpansionAPI : MonoBehaviour
     public bool UnlockRow(int y)
     {
         if (!IsRowUnlockable(y)) return false;
-        mono.Grid.UnlockRow(y);
+        mono.grid.UnlockRow(y);
         mono.RaiseCellsChanged();
-        OnGridExpanded.Invoke(mono.Grid.width, mono.Grid.height);
+        OnGridExpanded.Invoke(mono.grid.width, mono.grid.height);
         return true;
     }
 
     public bool UnlockColumn(int x)
     {
         if (!IsColumnUnlockable(x)) return false;
-        mono.Grid.UnlockColumn(x);
+        mono.grid.UnlockColumn(x);
         mono.RaiseCellsChanged();
-        OnGridExpanded.Invoke(mono.Grid.width, mono.Grid.height);
+        OnGridExpanded.Invoke(mono.grid.width, mono.grid.height);
         return true;
     }
 
     public bool AddRow()
     {
-        var grid = mono.Grid;
+        var grid = mono.grid;
         if (grid.height >= maxHeight) return false;
 
         int newRow = grid.height;
@@ -54,7 +54,7 @@ public class GridExpansionAPI : MonoBehaviour
 
     public bool AddColumn()
     {
-        var grid = mono.Grid;
+        var grid = mono.grid;
         if (grid.width >= maxWidth) return false;
 
         int newCol = grid.width;
@@ -70,19 +70,19 @@ public class GridExpansionAPI : MonoBehaviour
     {
         if (newWidth > maxWidth || newHeight > maxHeight) return false;
 
-        mono.Grid.Resize(newWidth, newHeight);
+        mono.grid.Resize(newWidth, newHeight);
         mono.RaiseCellsChanged();
         OnGridExpanded.Invoke(newWidth, newHeight);
         return true;
     }
 
-    public bool CanExpandWidth => mono.Grid.width < maxWidth;
-    public bool CanExpandHeight => mono.Grid.height < maxHeight;
+    public bool CanExpandWidth => mono.grid.width < maxWidth;
+    public bool CanExpandHeight => mono.grid.height < maxHeight;
 
     private bool IsRowUnlockable(int y) =>
-        y >= 0 && y < mono.Grid.height;
+        y >= 0 && y < mono.grid.height;
 
     private bool IsColumnUnlockable(int x) =>
-        x >= 0 && x < mono.Grid.width;
+        x >= 0 && x < mono.grid.width;
 }
 
