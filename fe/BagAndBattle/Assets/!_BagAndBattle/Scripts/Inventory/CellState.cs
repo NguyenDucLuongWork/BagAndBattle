@@ -1,7 +1,7 @@
-
-public enum CellState
+﻿public enum CellState
 {
+    Disable,
     Empty,
     Occupied,
-    Locked
+    Required
 }

@@ -8,7 +8,8 @@ public class InventoryGrid
     public int width;
     public int height;
 
-    public InventoryCell[,] cells;
+    [SerializeField]
+    private InventoryCell[] cells;
 
     public List<StoredObject> stored = new List<StoredObject>();
 
@@ -19,85 +20,121 @@ public class InventoryGrid
         BuildCells();
     }
 
+    private int Index(int x, int y) => y * width + x;
+    private int Index(Vector2Int v) => Index(v.x, v.y);
+
+    public bool InBounds(int x, int y) =>
+        x >= 0 && x < width && y >= 0 && y < height;
+
+    public bool InBounds(Vector2Int v) => InBounds(v.x, v.y);
+
+    public ref InventoryCell GetCell(int x, int y)
+    {
+        if (!InBounds(x, y))
+            throw new ArgumentOutOfRangeException($"Cell ({x},{y}) is out of bounds ({width}x{height})");
+        return ref cells[Index(x, y)];
+    }
+
+    public ref InventoryCell GetCell(Vector2Int v) => ref GetCell(v.x, v.y);
+
+    public StoredObject GetOccupant(int x, int y) => GetCell(x, y).occupant;
+
     public void BuildCells()
     {
-        cells = new InventoryCell[width, height];
-        for (int x = 0; x < width; x++)
-            for (int y = 0; y < height; y++)
-                cells[x, y] = new InventoryCell { state = CellState.Empty };
+        cells = new InventoryCell[width * height];
+        for (int i = 0; i < cells.Length; i++)
+            cells[i] = new InventoryCell { state = CellState.Empty };
     }
 
     public void RebuildCells()
     {
         BuildCells();
         foreach (var obj in stored)
-            foreach (var offset in obj.EffectiveFootprint.OccupiedCells())
-            {
-                var cell = cells[obj.origin.x + offset.x, obj.origin.y + offset.y];
-                cell.state = CellState.Occupied;
-                cell.occupant = obj;
-            }
+            MarkOccupied(obj);
     }
 
-    public bool InBounds(int x, int y) =>
-    x >= 0 && x < width && y >= 0 && y < height;
+    public bool TryPlace(StoredObject obj)
+    {
+        if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-    public bool InBounds(Vector2Int v) => InBounds(v.x, v.y);
+        foreach (var offset in obj.EffectiveFootprint.OccupiedCells())
+        {
+            int cx = obj.origin.x + offset.x;
+            int cy = obj.origin.y + offset.y;
+            if (!InBounds(cx, cy) || cells[Index(cx, cy)].state != CellState.Empty)
+                return false;
+        }
 
-    public InventoryCell GetCell(int x, int y) => cells[x, y];
-    public InventoryCell GetCell(Vector2Int v) => cells[v.x, v.y];
-
-    public StoredObject GetOccupant(int x, int y) => cells[x, y].occupant;
+        MarkOccupied(obj);
+        stored.Add(obj);
+        return true;
+    }
 
     public void Place(StoredObject obj)
     {
-        foreach (var offset in obj.EffectiveFootprint.OccupiedCells())
-        {
-            var cell = cells[obj.origin.x + offset.x, obj.origin.y + offset.y];
-            cell.state = CellState.Occupied;
-            cell.occupant = obj;
-        }
+        if (obj == null) throw new ArgumentNullException(nameof(obj));
+        MarkOccupied(obj);
         stored.Add(obj);
     }
 
     public void Remove(StoredObject obj)
     {
+        if (obj == null || !stored.Contains(obj)) return;
+
         foreach (var offset in obj.EffectiveFootprint.OccupiedCells())
         {
-            var cell = cells[obj.origin.x + offset.x, obj.origin.y + offset.y];
+            int cx = obj.origin.x + offset.x;
+            int cy = obj.origin.y + offset.y;
+            if (!InBounds(cx, cy)) continue;
+            ref var cell = ref cells[Index(cx, cy)];
             cell.state = CellState.Empty;
             cell.occupant = null;
         }
         stored.Remove(obj);
     }
 
+
     public void UnlockRow(int y)
     {
-        if (y < 0 || y >= height) return;
+        if (!InBounds(0, y)) return;
         for (int x = 0; x < width; x++)
-            if (cells[x, y].state == CellState.Locked)
-                cells[x, y].state = CellState.Empty;
+            if (cells[Index(x, y)].state == CellState.Disable)
+                cells[Index(x, y)].state = CellState.Empty;
     }
 
     public void UnlockColumn(int x)
     {
-        if (x < 0 || x >= width) return;
+        if (!InBounds(x, 0)) return;
         for (int y = 0; y < height; y++)
-            if (cells[x, y].state == CellState.Locked)
-                cells[x, y].state = CellState.Empty;
+            if (cells[Index(x, y)].state == CellState.Disable)
+                cells[Index(x, y)].state = CellState.Empty;
     }
 
     public void Resize(int newWidth, int newHeight)
     {
-        var newCells = new InventoryCell[newWidth, newHeight];
-        for (int x = 0; x < newWidth; x++)
-            for (int y = 0; y < newHeight; y++)
-                newCells[x, y] = (x < width && y < height)
-                    ? cells[x, y]
-                    : new InventoryCell { state = CellState.Locked };
+        var newCells = new InventoryCell[newWidth * newHeight];
+
+        for (int i = 0; i < newCells.Length; i++)
+            newCells[i].state = CellState.Disable;
+
+        for (int x = 0; x < Mathf.Min(width, newWidth); x++)
+            for (int y = 0; y < Mathf.Min(height, newHeight); y++)
+                newCells[y * newWidth + x] = cells[Index(x, y)];
 
         cells = newCells;
         width = newWidth;
         height = newHeight;
+    }
+
+    private void MarkOccupied(StoredObject obj)
+    {
+        foreach (var offset in obj.EffectiveFootprint.OccupiedCells())
+        {
+            int cx = obj.origin.x + offset.x;
+            int cy = obj.origin.y + offset.y;
+            ref var cell = ref cells[Index(cx, cy)];
+            cell.state = CellState.Occupied;
+            cell.occupant = obj;
+        }
     }
 }
