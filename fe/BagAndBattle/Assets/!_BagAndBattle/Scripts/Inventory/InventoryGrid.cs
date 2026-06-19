@@ -8,8 +8,8 @@ public class InventoryGrid
     public int width;
     public int height;
 
-    [SerializeField]
-    private InventoryCell[] cells;
+    [field: SerializeField]
+    public InventoryCell[] cells { get; private set; }
 
     public List<StoredObject> stored = new List<StoredObject>();
 
@@ -42,8 +42,17 @@ public class InventoryGrid
     public void BuildCells()
     {
         cells = new InventoryCell[width * height];
-        for (int i = 0; i < cells.Length; i++)
-            cells[i] = new InventoryCell { state = CellState.Empty };
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                cells[Index(x, y)] = new InventoryCell
+                {
+                    state = CellState.Empty,
+                    coord = new Vector2Int(x, y)
+                };
+            }
+        }
     }
 
     public void RebuildCells()
@@ -114,8 +123,17 @@ public class InventoryGrid
     {
         var newCells = new InventoryCell[newWidth * newHeight];
 
-        for (int i = 0; i < newCells.Length; i++)
-            newCells[i].state = CellState.Disable;
+        for (int y = 0; y < newHeight; y++)
+        {
+            for (int x = 0; x < newWidth; x++)
+            {
+                newCells[y * newWidth + x] = new InventoryCell
+                {
+                    state = CellState.Disable,
+                    coord = new Vector2Int(x, y)
+                };
+            }
+        }
 
         for (int x = 0; x < Mathf.Min(width, newWidth); x++)
             for (int y = 0; y < Mathf.Min(height, newHeight); y++)
@@ -124,6 +142,16 @@ public class InventoryGrid
         cells = newCells;
         width = newWidth;
         height = newHeight;
+    }
+
+    public void SetCellState(Vector2Int coord, CellState state, StoredObject occupant = null)
+    {
+        if (!InBounds(coord))
+            throw new ArgumentOutOfRangeException(nameof(coord), $"Cell {coord} is out of bounds ({width}x{height})");
+
+        ref var cell = ref cells[Index(coord)];
+        cell.state = state;
+        cell.occupant = occupant;
     }
 
     private void MarkOccupied(StoredObject obj)

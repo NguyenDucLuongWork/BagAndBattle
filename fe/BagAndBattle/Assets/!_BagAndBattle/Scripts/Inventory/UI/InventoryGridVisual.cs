@@ -4,7 +4,7 @@ public class InventoryGridVisual : MonoBehaviour
 {
     [Header("Cell Prefab")]
     [SerializeField] private GameObject cellPrefab;
-    [SerializeField] private GameObject itemSlotPrefab; 
+    [SerializeField] private GameObject itemSlotPrefab;
     [SerializeField] private float padding = 5f;
 
     [Header("Cell State Sprites")]
@@ -58,6 +58,8 @@ public class InventoryGridVisual : MonoBehaviour
 
         Vector2 cellSize = prefabRt.rect.size;
 
+        float totalHeight = grid.height * cellSize.y + Mathf.Max(0, grid.height - 1) * padding;
+
         for (int row = 0; row < grid.height; row++)
         {
             for (int col = 0; col < grid.width; col++)
@@ -65,7 +67,8 @@ public class InventoryGridVisual : MonoBehaviour
                 ref InventoryCell cell = ref grid.GetCell(col, row);
 
                 float xPos = col * (cellSize.x + padding);
-                float yPos = -row * (cellSize.y + padding);
+
+                float yPos = totalHeight - cellSize.y - row * (cellSize.y + padding);
 
                 GameObject cellGo = Instantiate(cellPrefab, cellContainer, false);
                 RectTransform cellRt = (RectTransform)cellGo.transform;
@@ -87,7 +90,6 @@ public class InventoryGridVisual : MonoBehaviour
         }
 
         float totalWidth = grid.width * cellSize.x + Mathf.Max(0, grid.width - 1) * padding;
-        float totalHeight = grid.height * cellSize.y + Mathf.Max(0, grid.height - 1) * padding;
 
         parent.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, totalWidth);
         parent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, totalHeight);
@@ -112,17 +114,18 @@ public class InventoryGridVisual : MonoBehaviour
             return;
         }
 
-        for (int row = 0; row < grid.height; row++)
+        for (int screenRow = 0; screenRow < grid.height; screenRow++)
         {
+            int gridY = grid.height - 1 - screenRow;
+
             for (int col = 0; col < grid.width; col++)
             {
-                int childIndex = row * grid.width + col;
-                ref InventoryCell cell = ref grid.GetCell(col, row);
+                int childIndex = screenRow * grid.width + col;
+                ref InventoryCell cell = ref grid.GetCell(col, gridY);
 
                 GameObject cellGo = cellContainer.GetChild(childIndex).gameObject;
                 ApplySprite(cellGo, cell.state);
 
-                // Keep slot RT reference in sync
                 cell.rectTransform = (RectTransform)itemSlotContainer.GetChild(childIndex);
             }
         }
@@ -130,9 +133,9 @@ public class InventoryGridVisual : MonoBehaviour
 
     private void SetupRect(RectTransform rt, Vector2 size, float x, float y)
     {
-        rt.anchorMin = new Vector2(0, 1);
-        rt.anchorMax = new Vector2(0, 1);
-        rt.pivot = new Vector2(0, 1);
+        rt.anchorMin = new Vector2(0, 0);
+        rt.anchorMax = new Vector2(0, 0);
+        rt.pivot = new Vector2(0, 0);
         rt.sizeDelta = size;
         rt.anchoredPosition = new Vector2(x, y);
     }

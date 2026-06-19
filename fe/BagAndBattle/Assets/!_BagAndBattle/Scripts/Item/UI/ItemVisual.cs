@@ -11,6 +11,7 @@ public class ItemVisual : MonoBehaviour
     [SerializeField]
     private Image image;
 
+
     public void Init(ItemData itemData)
     {
         this.itemData = itemData;
@@ -25,4 +26,6 @@ public class ItemVisual : MonoBehaviour
         image = GetComponent<Image>();
         image.sprite = itemData.sprite;
     }
+
+
 }

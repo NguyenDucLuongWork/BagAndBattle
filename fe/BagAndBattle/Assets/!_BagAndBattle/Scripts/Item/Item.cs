@@ -9,30 +9,56 @@ public class Item : MonoBehaviour
     public ItemDataHolderSO itemDataHolderSO;
     public int index;
 
+    private ItemVisual itemVisual;
+    private Storable storable;
+
+    private void Awake()
+    {
+        itemVisual = GetComponentInChildren<ItemVisual>();
+        storable = GetComponentInChildren<Storable>();
+    }
+
     public void Start()
     {
+        if (itemDataHolderSO == null || itemDataHolderSO.itemDataList.Length == 0)
+        {
+            Debug.LogWarning($"{name}: itemDataHolderSO is missing or empty.");
+            return;
+        }
+
         index = Random.Range(0, itemDataHolderSO.itemDataList.Length);
         Init();
     }
+
     [ContextMenu("Init")]
     public void Init()
     {
-        if (index >= itemDataHolderSO.itemDataList.Length)
+        if (itemDataHolderSO == null || index < 0 || index >= itemDataHolderSO.itemDataList.Length)
         {
-            Debug.LogWarning("Index item out of range");
+            Debug.LogWarning($"{name}: index {index} out of range.");
+            return;
         }
+
         ItemData itemData = itemDataHolderSO.itemDataList[index];
 
-        ItemVisual itemVisual= GetComponentInChildren<ItemVisual>();
-        itemVisual.Init(itemData);
+        if (itemVisual != null)
+            itemVisual.Init(itemData);
+        else
+            Debug.LogWarning($"{name}: missing ItemVisual in children.");
 
-        Storable storable = GetComponentInChildren<Storable>();
-        storable.Init(itemData.footprint);
+        if (storable != null)
+            storable.Init(itemData.footprint);
+        else
+            Debug.LogWarning($"{name}: missing Storable in children.");
     }
 
     public void DebugLogItem()
     {
-        if (index >= itemDataHolderSO.itemDataList.Length) return;
+        if (itemDataHolderSO == null || index < 0 || index >= itemDataHolderSO.itemDataList.Length)
+        {
+            Debug.LogWarning($"{name}: index {index} out of range.");
+            return;
+        }
 
         Debug.Log(itemDataHolderSO.itemDataList[index].sprite);
     }
