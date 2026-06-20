@@ -21,7 +21,7 @@ public class Inventory : BaseSingleton<Inventory>
 
     public event Action<StoredObject> OnItemRemoved;
 
-    [field:SerializeField]
+    [field: SerializeField]
     public InventoryGrid grid { get; private set; }
 
     public InventoryGridVisual inventoryGridVisual { get; private set; }
@@ -37,6 +37,9 @@ public class Inventory : BaseSingleton<Inventory>
         inventoryGridVisual = GetComponent<InventoryGridVisual>();
         inventoryGridVisual.ShowGrid(grid);
 
+        OnCellsChanged += () => inventoryGridVisual.RefreshGrid(grid);
+        OnCellsChanged += () => { Debug.Log("Hi"); };
+
     }
 
     private void LockRegionOutside(int playableW, int playableH)
@@ -47,47 +50,43 @@ public class Inventory : BaseSingleton<Inventory>
                     grid.GetCell(x, y).state = CellState.Disable;
     }
 
-    public StoredObject TryPlace(Storable storable, Vector2Int origin, int rotation)
+    public bool TryPlaceOrMove(Storable storable, Vector2Int origin, int rotation, StoredObject existing, out StoredObject result)
     {
-        var result = PlacementValidator.CanPlace(grid, storable, origin, rotation);
-        if (!result.Success)
+        var validation = PlacementValidator.CanPlace(grid, storable, origin, rotation, ignore: existing);
+
+        if (!validation.Success)
         {
-            Debug.Log($"[InventoryGridMono] TryPlace failed: {result}");
-            return null;
-        }
-
-        var obj = new StoredObject
-        {
-            storable = storable,
-            origin = origin,
-            rotation = rotation
-        };
-
-        grid.Place(obj);
-        OnItemPlaced?.Invoke(obj);
-        OnCellsChanged?.Invoke();
-        return obj;
-    }
-
-    public bool TryMove(StoredObject obj, Vector2Int newOrigin, int newRotation)
-    {
-        var result = PlacementValidator.CanPlace(grid, obj.storable, newOrigin, newRotation,
-            ignore: obj);
-
-        if (!result.Success)
-        {
-            Debug.Log($"[InventoryGridMono] TryMove failed: {result}");
+            Debug.Log($"[Inventory] TryPlaceOrMove failed: {validation}");
+            result = null;
             return false;
         }
 
-        grid.Remove(obj);
-        obj.origin = newOrigin;
-        obj.rotation = newRotation;
+        bool isMove = existing != null;
+
+        if (isMove)
+            grid.Remove(existing);
+
+        var obj = existing ?? new StoredObject { storable = storable };
+        obj.origin = origin;
+        obj.rotation = rotation;
+
         grid.Place(obj);
+        result = obj;
+
+        if (!isMove)
+            OnItemPlaced?.Invoke(obj);
 
         OnCellsChanged?.Invoke();
+        Debug.Log("CallingOnCellChanged");
         return true;
     }
+
+    public bool TryPlace(Storable storable, Vector2Int origin, int rotation, out StoredObject placed) =>
+        TryPlaceOrMove(storable, origin, rotation, null, out placed);
+
+    public bool TryMove(StoredObject obj, Vector2Int newOrigin, int newRotation) =>
+        TryPlaceOrMove(obj.storable, newOrigin, newRotation, obj, out _);
+
     public void Remove(StoredObject obj)
     {
         grid.Remove(obj);
@@ -111,4 +110,17 @@ public class Inventory : BaseSingleton<Inventory>
 
     public bool IsCellFree(Vector2Int cell) =>
         grid.InBounds(cell) && grid.GetCell(cell).state == CellState.Empty;
+
+    public void SetCellState(Vector2Int cell, CellState state, StoredObject occupant = null)
+    {
+        if (!grid.InBounds(cell))
+        {
+            Debug.LogWarning($"[Inventory] SetCellState failed: {cell} is out of bounds.");
+            return;
+        }
+
+        grid.SetCellState(cell, state, occupant);
+        OnCellsChanged?.Invoke();
+    }
+
 }

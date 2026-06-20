@@ -6,11 +6,10 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.EventSystems;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
+using LgTyLib.Core;
 
-public class InputManager : MonoBehaviour
+public class InputManager : BaseSingleton<InputManager>
 {
-    public static InputManager Instance { get; private set; }
-
     [Header("Click / Tap")]
     [Tooltip("Max screen pixels moved before a press is no longer a click.")]
     [SerializeField] private float clickMoveThreshold = 10f;
@@ -46,17 +45,15 @@ public class InputManager : MonoBehaviour
     private float pressStartTime;
     private bool pressOnUI;
 
-    private InputAction pointerPress;
-    private InputAction pointerPosition;
+    private int activeTouchFingerId = -1;
 
-    private void Awake()
+    private InputAction pointerPress;
+
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
 
         pointerPress = new InputAction("PointerPress", InputActionType.Button, "<Mouse>/leftButton");
-        pointerPosition = new InputAction("PointerPosition", InputActionType.Value, "<Mouse>/position");
 
         pointerPress.performed += OnPressPerformed;
         pointerPress.canceled += OnPressCanceled;
@@ -65,21 +62,20 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         pointerPress.Enable();
-        pointerPosition.Enable();
         EnhancedTouchSupport.Enable();
     }
 
     private void OnDisable()
     {
         pointerPress.Disable();
-        pointerPosition.Disable();
         EnhancedTouchSupport.Disable();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
         pointerPress.performed -= OnPressPerformed;
         pointerPress.canceled -= OnPressCanceled;
+        base.OnDestroy();
     }
 
     private void Update()
@@ -96,9 +92,14 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private static Vector2 GetMousePosition()
+    {
+        return Mouse.current?.position.ReadValue() ?? Vector2.zero;
+    }
+
     private void TrackMousePosition()
     {
-        Vector2 pos = pointerPosition.ReadValue<Vector2>();
+        Vector2 pos = GetMousePosition();
         CurrentPointerPosition = pos;
         OnPointerPosition?.Invoke(pos);
     }
@@ -115,24 +116,21 @@ public class InputManager : MonoBehaviour
     {
         if (IsMobilePlatform()) return;
 
-        Vector2 pos = pointerPosition.ReadValue<Vector2>();
-        BeginPress(pos);
+        BeginPress(GetMousePosition(), -1);
     }
 
     private void OnPressCanceled(InputAction.CallbackContext ctx)
     {
         if (IsMobilePlatform()) return;
 
-        Vector2 pos = pointerPosition.ReadValue<Vector2>();
-        EndPress(pos);
+        EndPress(GetMousePosition());
     }
 
     private void HandleMouseHeldUpdate()
     {
         if (state == PressState.Idle) return;
 
-        Vector2 pos = pointerPosition.ReadValue<Vector2>();
-        UpdatePress(pos);
+        UpdatePress(GetMousePosition());
     }
 
     private void HandleTouchInput()
@@ -149,7 +147,7 @@ public class InputManager : MonoBehaviour
         switch (touch.phase)
         {
             case TouchPhase.Began:
-                BeginPress(touch.screenPosition);
+                BeginPress(touch.screenPosition, touch.finger.index);
                 break;
 
             case TouchPhase.Moved:
@@ -164,12 +162,13 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void BeginPress(Vector2 pos)
+    private void BeginPress(Vector2 pos, int fingerId)
     {
         pressStartPosition = pos;
         previousPosition = pos;
         pressStartTime = Time.unscaledTime;
-        pressOnUI = IsPointerOverUI(pos);
+        activeTouchFingerId = fingerId;
+        pressOnUI = IsPointerOverUI(pos, fingerId);
         state = PressState.Pressing;
 
         StopAllCoroutines();
@@ -185,7 +184,7 @@ public class InputManager : MonoBehaviour
                     float moved = Vector2.Distance(pos, pressStartPosition);
                     if (moved >= dragStartThreshold)
                     {
-                        StopAllCoroutines(); 
+                        StopAllCoroutines();
                         state = PressState.Dragging;
                         OnDragBegin?.Invoke(pressStartPosition);
                         OnDrag?.Invoke(pos, pos - previousPosition);
@@ -204,15 +203,17 @@ public class InputManager : MonoBehaviour
                 }
 
             case PressState.Holding:
-                float movedFromStart = Vector2.Distance(pos, pressStartPosition);
-                if (movedFromStart >= dragStartThreshold)
                 {
-                    state = PressState.Dragging;
-                    OnDragBegin?.Invoke(pressStartPosition);
-                    OnDrag?.Invoke(pos, pos - previousPosition);
-                    previousPosition = pos;
+                    float movedFromStart = Vector2.Distance(pos, pressStartPosition);
+                    if (movedFromStart >= dragStartThreshold)
+                    {
+                        state = PressState.Dragging;
+                        OnDragBegin?.Invoke(pressStartPosition);
+                        OnDrag?.Invoke(pos, pos - previousPosition);
+                        previousPosition = pos;
+                    }
+                    break;
                 }
-                break;
         }
     }
 
@@ -240,8 +241,7 @@ public class InputManager : MonoBehaviour
                 break;
         }
 
-        state = PressState.Idle;
-        previousPosition = Vector2.zero;
+        ResetPressState();
     }
 
     private void CancelPress()
@@ -253,9 +253,15 @@ public class InputManager : MonoBehaviour
         else if (state == PressState.Holding)
             OnHoldEnd?.Invoke(previousPosition);
 
-        state = PressState.Idle;
+        ResetPressState();
     }
 
+    private void ResetPressState()
+    {
+        state = PressState.Idle;
+        previousPosition = Vector2.zero;
+        activeTouchFingerId = -1;
+    }
     private IEnumerator HoldRoutine(Vector2 startPos)
     {
         yield return new WaitForSecondsRealtime(holdDuration);
@@ -264,20 +270,20 @@ public class InputManager : MonoBehaviour
         {
             state = PressState.Holding;
             OnHoldBegin?.Invoke(startPos);
+            Debug.Log("Holding");
         }
     }
 
-
-    private static bool IsPointerOverUI(Vector2 screenPos)
+    private static bool IsPointerOverUI(Vector2 screenPos, int fingerId = -1)
     {
-        return EventSystem.current != null &&
-               EventSystem.current.IsPointerOverGameObject();
+        if (EventSystem.current == null) return false;
+        return EventSystem.current.IsPointerOverGameObject(fingerId);
     }
 
     private static bool IsMobilePlatform()
     {
 #if UNITY_EDITOR
-        return false; 
+        return UnityEngine.Device.Application.isMobilePlatform;
 #else
         return Application.isMobilePlatform;
 #endif

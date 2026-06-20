@@ -48,7 +48,7 @@ public class StorableFootprint
         for (int row = 0; row < height; row++)
             for (int col = 0; col < width; col++)
                 if (this[col, row])
-                    yield return new Vector2Int(col, row);
+                    yield return new Vector2Int(col, height - 1 - row);
     }
 
     public void RotateSelf(int steps = 1)
