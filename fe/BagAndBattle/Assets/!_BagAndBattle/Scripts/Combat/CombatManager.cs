@@ -82,6 +82,24 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void StartCombatWithDebugItems(List<ItemData> testItems)
+    {
+        if (CurrentState != GameState.Preparation) return;
+
+        CurrentState = GameState.Combat;
+
+        activeItems.Clear();
+        foreach (var data in testItems)
+        {
+            if (data != null)
+            {
+                activeItems.Add(new CombatItemTracker(null, data));
+            }
+        }
+
+        Debug.Log($"[CombatManager] Bắt đầu Combat Test không cần Inventory! Đã nạp {activeItems.Count} item.");
+    }
+
     private void Update()
     {
         if (CurrentState != GameState.Combat) return;
@@ -112,7 +130,8 @@ public class CombatManager : MonoBehaviour
             if (tracker.currentTimer >= speed)
             {
                 tracker.currentTimer -= speed;
-                ProcessItemEffects(tracker.itemData, tracker.storedObject.storable.gameObject.name);
+                string itemName = tracker.storedObject != null ? tracker.storedObject.storable.gameObject.name : tracker.itemData.name;
+                ProcessItemEffects(tracker.itemData, itemName);
             }
         }
     }

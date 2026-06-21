@@ -48,7 +48,35 @@ public class CombatTester : MonoBehaviour
             Debug.Log("[CombatTester] Phím Enter được nhấn! Đang gọi StartCombat...");
             if (CombatManager.Instance != null)
             {
-                CombatManager.Instance.StartCombat();
+                Inventory inv = inventory != null ? inventory : Object.FindObjectOfType<Inventory>();
+
+                if (inv != null)
+                {
+                    CombatManager.Instance.StartCombat();
+                }
+                else
+                {
+                    Debug.LogWarning("[CombatTester] Không có Inventory trong Scene! Bắt đầu combat giả lập bằng các Test Item Prefabs...");
+                    System.Collections.Generic.List<ItemData> debugItems = new System.Collections.Generic.List<ItemData>();
+                    if (testItemPrefabs != null)
+                    {
+                        foreach(var prefab in testItemPrefabs)
+                        {
+                            if (prefab != null)
+                            {
+                                // Instantiate để item tự random index trong Start()
+                                Item tempItem = Instantiate(prefab);
+                                tempItem.Start();
+                                if (tempItem.Data != null)
+                                {
+                                    debugItems.Add(tempItem.Data);
+                                }
+                                Destroy(tempItem.gameObject);
+                            }
+                        }
+                    }
+                    CombatManager.Instance.StartCombatWithDebugItems(debugItems);
+                }
             }
             else
             {
@@ -76,10 +104,10 @@ public class CombatTester : MonoBehaviour
 
     private void SpawnTestItems()
     {
-        Inventory inv = inventory != null ? inventory : Inventory.Instance;
+        Inventory inv = inventory != null ? inventory : Object.FindObjectOfType<Inventory>();
         if (inv == null)
         {
-            Debug.LogError("[CombatTester] Không tìm thấy Inventory nào! Không thể spawn.");
+            Debug.LogError("[CombatTester] Không tìm thấy Inventory nào trong Scene! Để sử dụng phím T (Spawn vào grid), bạn phải tạo một Grid Inventory trước. Hoặc nhấn luôn Enter để chạy combat giả lập không cần Grid.");
             return;
         }
 
