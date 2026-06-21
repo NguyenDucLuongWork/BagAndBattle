@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -41,6 +41,7 @@ public class DragableUGUI : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (Inventory.Instance != null && Inventory.Instance.IsLocked) return;
         pointerIsDown = true;
     }
 

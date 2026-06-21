@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -11,6 +11,16 @@ public class Item : MonoBehaviour
 
     private ItemVisual itemVisual;
     private Storable storable;
+
+    public ItemData Data
+    {
+        get
+        {
+            if (itemDataHolderSO != null && index >= 0 && index < itemDataHolderSO.itemDataList.Length)
+                return itemDataHolderSO.itemDataList[index];
+            return null;
+        }
+    }
 
     private void Awake()
     {

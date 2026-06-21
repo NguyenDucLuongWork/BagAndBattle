@@ -33,3 +33,5 @@ UserSettings/
 *.csproj
 *.sln
 *.user
+# Visual Studio
+.vs/

@@ -1,0 +1,6 @@
+E:\BagAndBattle\fe\BagAndBattle\Temp\bin\Debug\Assembly-CSharp.dll
+E:\BagAndBattle\fe\BagAndBattle\Temp\bin\Debug\Assembly-CSharp.pdb
+E:\BagAndBattle\fe\BagAndBattle\obj\Debug\Assembly-CSharp.csproj.AssemblyReference.cache
+E:\BagAndBattle\fe\BagAndBattle\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+E:\BagAndBattle\fe\BagAndBattle\obj\Debug\Assembly-CSharp.dll
+E:\BagAndBattle\fe\BagAndBattle\obj\Debug\Assembly-CSharp.pdb
