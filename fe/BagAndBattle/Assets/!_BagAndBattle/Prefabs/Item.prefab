@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9164028542345594232}
   - component: {fileID: 8196463361111641022}
   - component: {fileID: 5621854052992502101}
+  - component: {fileID: 4335650890643918290}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -113,6 +114,60 @@ MonoBehaviour:
     width: 1
     height: 3
   rotation: 0
+--- !u!114 &4335650890643918290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991471892014153151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f57d117f00d2264c91df57f195a4150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProgressTimer
+  duration: 2
+  finishedHoldDuration: 1
+  playOnStart: 1
+  useUnscaledTime: 0
+  loop: 1
+  OnProgress:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4335650890643918290}
+        m_TargetAssemblyTypeName: ProgressTimer, Assembly-CSharp
+        m_MethodName: SetProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnProgressFinished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4230517659371118555}
+        m_TargetAssemblyTypeName: ItemVisual, Assembly-CSharp
+        m_MethodName: UsingEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHoldFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  uiImage: {fileID: 7555353248340620160}
 --- !u!1 &1551167624295059391
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +237,7 @@ GameObject:
   - component: {fileID: 2740853617793377765}
   - component: {fileID: 7555353248340620160}
   - component: {fileID: 4230517659371118555}
+  - component: {fileID: 248485135947398137}
   m_Layer: 5
   m_Name: ItemVisual
   m_TagString: Untagged
@@ -228,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 53f3715d2422b8841851df8b19d76646, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -267,7 +323,23 @@ MonoBehaviour:
       cells: 
       width: 0
       height: 0
-  image: {fileID: 7555353248340620160}
+    triggerSpeed: 1
+    damage: 0
+    heal: 0
+    shield: 0
+--- !u!114 &248485135947398137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783876918068223756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3075b0eff156d9a418df46ce3688d9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LgTyLib.Modules.SpriteLocalCoords.SpriteLocalCoords
+  usePropertyBlock: 1
 --- !u!1 &9066340239377860293
 GameObject:
   m_ObjectHideFlags: 0

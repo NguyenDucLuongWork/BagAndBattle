@@ -393,10 +393,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8196463361111641022, guid: 100387baf672f4547af9f37c3aaa4555, type: 3}
-      propertyPath: OnDraggingEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SnapToInventoryGrid
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

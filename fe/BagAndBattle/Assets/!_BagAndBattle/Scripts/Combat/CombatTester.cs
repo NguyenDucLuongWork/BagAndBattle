@@ -76,7 +76,7 @@ public class CombatTester : MonoBehaviour
 
     private void SpawnTestItems()
     {
-        Inventory inv = inventory != null ? inventory : Object.FindObjectOfType<Inventory>();
+        Inventory inv = inventory != null ? inventory : Object.FindAnyObjectByType<Inventory>();
         if (inv == null)
         {
             Debug.LogError("[CombatTester] Không tìm thấy Inventory nào trong Scene! Để sử dụng phím T (Spawn vào grid), bạn phải tạo một Grid Inventory trước. Hoặc nhấn luôn Enter để chạy combat giả lập không cần Grid.");

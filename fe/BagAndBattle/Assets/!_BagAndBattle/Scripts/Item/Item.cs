@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
     public ItemDataHolderSO itemDataHolderSO;
     public int index;
 
-    private ItemVisual itemVisual;
+    public ItemVisual itemVisual { get; private set; }
     private Storable storable;
 
     public ItemData Data
