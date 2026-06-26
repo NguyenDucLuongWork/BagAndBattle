@@ -165,4 +165,19 @@ public class InventoryGrid
             cell.occupant = obj;
         }
     }
+
+    public void ReconcileCells()
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            if (cells[i].state != CellState.Disable)
+            {
+                cells[i].state = CellState.Empty;
+                cells[i].occupant = null;
+            }
+        }
+
+        foreach (var obj in stored)
+            MarkOccupied(obj);
+    }
 }

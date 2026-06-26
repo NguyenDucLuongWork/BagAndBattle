@@ -40,8 +40,6 @@ public class Inventory : BaseSingleton<Inventory>
         inventoryGridVisual.ShowGrid(grid);
 
         OnCellsChanged += () => inventoryGridVisual.RefreshGrid(grid);
-        OnCellsChanged += () => { Debug.Log("Hi"); };
-
     }
 
     private void LockRegionOutside(int playableW, int playableH)
@@ -65,7 +63,9 @@ public class Inventory : BaseSingleton<Inventory>
 
         if (!validation.Success)
         {
-            Debug.Log($"[Inventory] TryPlaceOrMove failed: {validation}");
+            //Debug.Log($"[Inventory] TryPlaceOrMove failed: {validation}");
+            grid.ReconcileCells();
+            OnCellsChanged?.Invoke();
             result = null;
             return false;
         }
@@ -86,7 +86,7 @@ public class Inventory : BaseSingleton<Inventory>
             OnItemPlaced?.Invoke(obj);
 
         OnCellsChanged?.Invoke();
-        Debug.Log("CallingOnCellChanged");
+        //Debug.Log("CallingOnCellChanged");
         return true;
     }
 

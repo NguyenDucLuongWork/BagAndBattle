@@ -18,6 +18,6 @@ public class Dev_ItemTester : MonoBehaviour
 
         int index = Random.Range(0, items.Length);
 
-        itemUIVisual.Init(items[index]);
+        itemUIVisual.Init((RectTransform)this.transform, items[index]);
     }
 }

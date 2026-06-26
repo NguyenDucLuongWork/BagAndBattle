@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(RectTransform))]
-public class DragableUGUI : MonoBehaviour, IPointerDownHandler
+public class DragableUGUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [Tooltip("If null, will use the root Canvas automatically.")]
     [SerializeField] private Canvas canvas;
@@ -14,7 +14,9 @@ public class DragableUGUI : MonoBehaviour, IPointerDownHandler
     [SerializeField]
     private bool pointerIsDown;
 
+    public UnityEvent OnDragStarted;
     public UnityEvent OnDraggingEnded;
+    public UnityEvent OnClick;
 
     private void Awake()
     {
@@ -45,10 +47,24 @@ public class DragableUGUI : MonoBehaviour, IPointerDownHandler
         pointerIsDown = true;
     }
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (!pointerIsDown) return;
+
+        if (!isDragging)
+        {
+            OnClick?.Invoke();
+        }
+
+        pointerIsDown = false;
+    }
+
     private void HandleDragBegin(Vector2 position)
     {
-        if (pointerIsDown)
-            isDragging = true;
+        if (!pointerIsDown) return;
+
+        isDragging = true;
+        OnDragStarted?.Invoke();
     }
 
     private void HandleDrag(Vector2 position, Vector2 delta)

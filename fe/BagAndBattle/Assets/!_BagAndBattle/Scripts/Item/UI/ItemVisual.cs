@@ -22,7 +22,7 @@ public class ItemVisual : MonoBehaviour
     private static readonly int SpriteUVsProperty = Shader.PropertyToID("_SpriteUVs");
     private static readonly int ProgressProperty = Shader.PropertyToID("_Progress");
 
-    public void Init(ItemData itemData)
+    public void Init(RectTransform itemTransform, ItemData itemData)
     {
         this.itemData = itemData;
         uiImage = GetComponent<Image>();
@@ -31,6 +31,7 @@ public class ItemVisual : MonoBehaviour
         materialInstance = uiImage.materialForRendering;
 
         UpdateVisual();
+        ApplySize(itemTransform);
     }
 
 
@@ -99,6 +100,23 @@ public class ItemVisual : MonoBehaviour
         Vector4 shaderVector = new Vector4(width, height, uvRect.x, uvRect.y);
 
         uiImage.material.SetVector(SpriteUVsProperty, shaderVector);
+    }
+
+    public void Rotate(RectTransform itemTransform, int steps = 1)
+    {
+        float angle = -90f * steps;
+        transform.Rotate(0f, 0f, angle, Space.Self);
+
+        RectTransform rt = (RectTransform)transform;
+        Vector2 sourceSize = itemTransform.sizeDelta;
+    }
+
+    private void ApplySize(RectTransform itemTransform)
+    {
+        RectTransform rt = (RectTransform)transform;
+        RectTransform sourceRt = (RectTransform)itemTransform.transform;
+
+        rt.sizeDelta = sourceRt.sizeDelta;
     }
 
 }
