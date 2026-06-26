@@ -4,13 +4,14 @@ using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Item : MonoBehaviour
+public partial class Item : MonoBehaviour
 {
     public ItemDataHolderSO itemDataHolderSO;
     public int index;
 
     public ItemVisual itemVisual { get; private set; }
     private Storable storable;
+    private StorableVisual storableVisual;
 
     public ItemData Data
     {
@@ -26,6 +27,7 @@ public class Item : MonoBehaviour
     {
         itemVisual = GetComponentInChildren<ItemVisual>();
         storable = GetComponentInChildren<Storable>();
+        storableVisual = GetComponentInChildren<StorableVisual>();
     }
 
     public void Start()
@@ -51,15 +53,16 @@ public class Item : MonoBehaviour
 
         ItemData itemData = itemDataHolderSO.itemDataList[index];
 
-        if (itemVisual != null)
-            itemVisual.Init(itemData);
-        else
-            Debug.LogWarning($"{name}: missing ItemVisual in children.");
-
         if (storable != null)
             storable.Init(itemData.footprint);
         else
             Debug.LogWarning($"{name}: missing Storable in children.");
+
+        if (itemVisual != null)
+            itemVisual.Init((RectTransform)this.transform, itemData);
+        else
+            Debug.LogWarning($"{name}: missing ItemVisual in children.");
+
     }
 
     public void DebugLogItem()

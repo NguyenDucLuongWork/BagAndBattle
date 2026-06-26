@@ -39,7 +39,7 @@ public static class PlacementValidator
         int rotation,
         StoredObject ignore = null)
     {
-        var footprint = storable.footprint.Rotated(rotation);
+        var footprint = storable.Footprint.Rotated(rotation);
 
         foreach (var offset in footprint.OccupiedCells())
         {
@@ -79,7 +79,7 @@ public static class PlacementValidator
         int rotation,
         StoredObject ignore = null)
     {
-        var footprint = storable.footprint.Rotated(rotation);
+        var footprint = storable.Footprint.Rotated(rotation);
         foreach (var offset in footprint.OccupiedCells())
         {
             int x = origin.x + offset.x;
@@ -114,7 +114,7 @@ public static class PlacementValidator
         Vector2 cellSize,
         Vector2 gridOriginWorld)
     {
-        var fp = storable.footprint.Rotated(rotation);
+        var fp = storable.Footprint.Rotated(rotation);
 
         float rawX = (worldPos.x - gridOriginWorld.x) / cellSize.x;
         float rawY = (worldPos.y - gridOriginWorld.y) / cellSize.y;

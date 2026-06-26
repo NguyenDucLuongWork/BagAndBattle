@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class StorableVisual : MonoBehaviour
 {
     [SerializeField] private GameObject cellPrefab;
-    [SerializeField] private float cellSpacing = 5f; 
-    [SerializeField] private float outerPadding = 5f; 
+    [SerializeField] private float cellSpacing = 5f;
+    [SerializeField] private float outerPadding = 5f;
 
     [Header("Cell State Sprites")]
     [SerializeField] private Sprite disabledSprite;
@@ -20,11 +20,6 @@ public class StorableVisual : MonoBehaviour
     private void Awake()
     {
         parent = transform as RectTransform;
-    }
-
-    public void ShowStorableFootprint(Storable storable)
-    {
-        ShowStorableFootprint(storable.footprint);
     }
 
     public void ShowStorableFootprint(StorableFootprint footprint)
@@ -43,6 +38,13 @@ public class StorableVisual : MonoBehaviour
 
         Vector2 cellSize = prefabRt.rect.size;
 
+        Vector2 totalSize = GetTotalSize(footprint, cellSize);
+        Vector2 halfSize = totalSize * 0.5f;
+
+        parent.anchorMin = new Vector2(0.5f, 0.5f);
+        parent.anchorMax = new Vector2(0.5f, 0.5f);
+        parent.pivot = new Vector2(0.5f, 0.5f);
+
         for (int row = 0; row < footprint.height; row++)
         {
             for (int col = 0; col < footprint.width; col++)
@@ -52,14 +54,13 @@ public class StorableVisual : MonoBehaviour
                 GameObject go = Instantiate(cellPrefab, parent, false);
                 RectTransform rt = (RectTransform)go.transform;
 
-                rt.anchorMin = new Vector2(0, 1);
-                rt.anchorMax = new Vector2(0, 1);
-                rt.pivot = new Vector2(0, 1);
+                rt.anchorMin = new Vector2(0.5f, 0.5f);
+                rt.anchorMax = new Vector2(0.5f, 0.5f);
+                rt.pivot = new Vector2(0.5f, 0.5f);
                 rt.sizeDelta = cellSize;
 
-                // Offset cells by outerPadding so they don't hug the edge
-                float xPos = outerPadding + col * (cellSize.x + cellSpacing);
-                float yPos = -(outerPadding + row * (cellSize.y + cellSpacing));
+                float xPos = -halfSize.x + outerPadding + cellSize.x * 0.5f + col * (cellSize.x + cellSpacing);
+                float yPos = halfSize.y - outerPadding - cellSize.y * 0.5f - row * (cellSize.y + cellSpacing);
                 rt.anchoredPosition = new Vector2(xPos, yPos);
 
                 ApplySprite(go, state);
@@ -133,23 +134,28 @@ public class StorableVisual : MonoBehaviour
         }
     }
 
+    private Vector2 GetTotalSize(StorableFootprint footprint, Vector2 cellSize)
+    {
+        float totalWidth = outerPadding * 2 + footprint.width * cellSize.x + Mathf.Max(0, footprint.width - 1) * cellSpacing;
+        float totalHeight = outerPadding * 2 + footprint.height * cellSize.y + Mathf.Max(0, footprint.height - 1) * cellSpacing;
+        return new Vector2(totalWidth, totalHeight);
+    }
+
     private void UpdateParentSize(StorableFootprint footprint)
     {
         RectTransform prefabRt = cellPrefab.GetComponent<RectTransform>();
         if (prefabRt == null) return;
 
         Vector2 cellSize = prefabRt.rect.size;
+        Vector2 totalSize = GetTotalSize(footprint, cellSize);
 
-        float totalWidth = outerPadding * 2 + footprint.width * cellSize.x + Mathf.Max(0, footprint.width - 1) * cellSpacing;
-        float totalHeight = outerPadding * 2 + footprint.height * cellSize.y + Mathf.Max(0, footprint.height - 1) * cellSpacing;
-
-        parent.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, totalWidth);
-        parent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, totalHeight);
+        parent.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, totalSize.x);
+        parent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, totalSize.y);
 
         if (itemRoot != null)
         {
-            itemRoot.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, totalWidth);
-            itemRoot.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, totalHeight);
+            itemRoot.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, totalSize.x);
+            itemRoot.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, totalSize.y);
         }
     }
 }

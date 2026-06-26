@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 public class Storable : MonoBehaviour
 {
-    public StorableFootprint footprint;
+    [SerializeField] private StorableFootprint footprint;
+    [SerializeField] private RectTransform itemHolder;
+
+    public StorableFootprint Footprint => footprint;
 
     [SerializeField] private int rotation = 0;
+    public int Rotation => rotation;
 
     private StorableVisual visual;
     private RectTransform rectTransform;
@@ -19,25 +21,36 @@ public class Storable : MonoBehaviour
     {
         visual = GetComponentInChildren<StorableVisual>();
         rectTransform = GetComponent<RectTransform>();
-        visual.ShowStorableFootprint(footprint);
+        visual.ShowStorableFootprint(footprint.Rotated(rotation));
     }
 
     public CellState GetCellState(int col, int row)
     {
-        return footprint[col, row] ? CellState.Required : CellState.Disable;
+        var rotated = footprint.Rotated(rotation);
+        return rotated[col, row] ? CellState.Required : CellState.Disable;
     }
 
     [ContextMenu("Init")]
     public void Init(StorableFootprint footprint)
     {
         this.footprint = footprint;
+        rotation = 0;
+
+        if (itemHolder == null)
+        {
+            if (rectTransform == null)
+                rectTransform = GetComponent<RectTransform>();
+
+            itemHolder = rectTransform.parent as RectTransform;
+        }
+
         UpdateVisual();
     }
 
     [ContextMenu("UpdateVisual")]
     public void UpdateVisual()
     {
-        visual.ShowStorableFootprint(footprint);
+        visual.ShowStorableFootprint(footprint.Rotated(rotation));
     }
 
     public void SnapToCell(RectTransform cellRectTransform)
@@ -100,18 +113,23 @@ public class Storable : MonoBehaviour
 
     public void TryPlaceOrSnapToInventory()
     {
-        if (PlaceItem())
-
-            return;
-        
+        PlaceItem();
     }
 
     public bool PlaceItem()
     {
+        if (InteractionManager.Instance.IsPointerOverItemHolder())
+        {
+            Debug.Log("Is over item holder");
+            ReturnToItemHolder();
+            return false;
+        }
+
         var nearestCell = GetNearestCell();
         if (nearestCell == null)
         {
             Debug.LogWarning($"{name}: PlaceItem failed, no nearest cell found.");
+            SnapBackOnFailure();
             return false;
         }
 
@@ -127,12 +145,34 @@ public class Storable : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{name}: PlaceItem failed at {origin} (rotation {rotation}).");
+            //Debug.Log($"{name}: PlaceItem failed at {origin} (rotation {rotation}).");
+            SnapBackOnFailure();
         }
 
         return result;
     }
 
+
+    private void ReturnToItemHolder()
+    {
+        if (PlacedObject != null)
+            RemoveFromInventory();
+
+        SnapToCell(itemHolder);
+    }
+
+    private void SnapBackOnFailure()
+    {
+        if (PlacedObject != null)
+        {
+            var cell = Inventory.Instance.grid.GetCell(PlacedObject.origin);
+            SnapToCell(cell.rectTransform);
+        }
+        else
+        {
+            SnapToCell(itemHolder);
+        }
+    }
     public void RemoveFromInventory()
     {
         if (PlacedObject == null) return;
@@ -141,10 +181,22 @@ public class Storable : MonoBehaviour
         PlacedObject = null;
     }
 
-    public void RotateStorable(int steps = 1)
+    public bool RotateStorable(int steps = 1)
     {
-        rotation = ((rotation + steps) % 4 + 4) % 4;
-        footprint.RotateSelf(steps);
+        int newRotation = ((rotation + steps) % 4 + 4) % 4;
+
+        if (PlacedObject != null)
+        {
+            bool moved = Inventory.Instance.TryMove(PlacedObject, PlacedObject.origin, newRotation);
+            if (!moved)
+            {
+                Debug.Log($"{name}: RotateStorable blocked, no room to rotate at {PlacedObject.origin}.");
+                return false;
+            }
+        }
+
+        rotation = newRotation;
         UpdateVisual();
+        return true;
     }
 }
