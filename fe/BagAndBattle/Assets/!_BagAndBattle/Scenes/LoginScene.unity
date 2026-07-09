@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Username
+  m_text: Email
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -776,6 +776,7 @@ GameObject:
   - component: {fileID: 862851763}
   - component: {fileID: 862851765}
   - component: {fileID: 862851764}
+  - component: {fileID: 862851766}
   m_Layer: 5
   m_Name: LoginPanel
   m_TagString: Untagged
@@ -783,6 +784,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &862851766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862851762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b315bdabe9381f4dae24fe74748f0d5, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::BagAndBattle.UI.LoginUI
+  authServiceUrl: http://localhost:3000
+  nextSceneName: SampleScene
+  emailInput: {fileID: 1067365919}
+  passwordInput: {fileID: 511708308}
+  loginButton: {fileID: 444672844}
+  messageText: {fileID: 0}
 --- !u!224 &862851763
 RectTransform:
   m_ObjectHideFlags: 0

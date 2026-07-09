@@ -7,9 +7,15 @@ const registerSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters")
 });
 
-const loginSchema = z.object({
-  idToken: z.string().min(1, "Firebase ID Token is required")
-});
+const loginSchema = z.union([
+  z.object({
+    email: z.string().email("Invalid email format"),
+    password: z.string().min(1, "Password is required")
+  }),
+  z.object({
+    idToken: z.string().min(1, "Firebase ID Token is required")
+  })
+]);
 
 const googleLoginSchema = z.object({
   idToken: z.string().min(1, "Google ID Token is required")
@@ -31,8 +37,10 @@ class AuthController {
 
   async login(req, res) {
     try {
-      const { idToken } = loginSchema.parse(req.body);
-      const result = await authService.Login(idToken);
+      const credentials = loginSchema.parse(req.body);
+      const result = 'idToken' in credentials
+        ? await authService.Login(credentials.idToken)
+        : await authService.LoginWithEmail(credentials.email, credentials.password);
       res.status(200).json(result);
     } catch (error) {
       if (error instanceof z.ZodError) {

@@ -1,11 +1,12 @@
-const admin = require('firebase-admin');
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getAuth } = require('firebase-admin/auth');
 require('dotenv').config();
 
 // Initialize Firebase Admin (for backend operations: verify tokens, create users without logging in)
 let adminApp;
 try {
-  adminApp = admin.initializeApp({
-    credential: admin.credential.cert({
+  adminApp = initializeApp({
+    credential: cert({
       projectId: process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
       privateKey: process.env.FIREBASE_PRIVATE_KEY ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') : undefined,
@@ -19,6 +20,5 @@ try {
 }
 
 module.exports = {
-  admin,
-  adminAuth: adminApp ? admin.auth() : null
+  adminAuth: adminApp ? getAuth(adminApp) : null
 };

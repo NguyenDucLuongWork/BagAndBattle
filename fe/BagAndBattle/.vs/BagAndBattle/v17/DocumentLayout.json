@@ -3,15 +3,15 @@
   "WorkspaceRootPath": "E:\\BagAndBattle\\fe\\BagAndBattle\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|E:\\BagAndBattle\\fe\\BagAndBattle\\assets\\!_bagandbattle\\scripts\\combat\\combattester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|e:\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\ui\\loginui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\ui\\loginui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|e:\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\combat\\combattester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\combat\\combattester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|e:\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\combat\\autocombattest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\combat\\autocombattest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|e:\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\combat\\combatentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|E:\\BagAndBattle\\fe\\BagAndBattle\\assets\\!_bagandbattle\\scripts\\combat\\combatentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\combat\\combatentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -29,6 +29,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|E:\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Combat\\StatusEffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A47B9E3-766D-7BA9-A46A-C49092504970}|Assembly-CSharp.csproj|solutionrelative:Assets\\!_BagAndBattle\\Scripts\\Combat\\StatusEffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Combat\\AutoCombatTest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\!_BagAndBattle\\Scripts\\Combat\\AutoCombatTest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,11 +42,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "LoginUI.cs",
+              "DocumentMoniker": "E:\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\UI\\LoginUI.cs",
+              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\UI\\LoginUI.cs",
+              "ToolTip": "E:\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\UI\\LoginUI.cs",
+              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\UI\\LoginUI.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-01T10:28:33.158Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "AutoCombatTest.cs",
               "DocumentMoniker": "E:\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Combat\\AutoCombatTest.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Combat\\AutoCombatTest.cs",
@@ -50,8 +67,7 @@
               "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Combat\\AutoCombatTest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-21T13:53:14.888Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-21T13:53:14.888Z"
             },
             {
               "$type": "Document",
@@ -67,7 +83,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "CombatTester.cs",
               "DocumentMoniker": "E:\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Combat\\CombatTester.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Combat\\CombatTester.cs",
@@ -124,8 +140,7 @@
               "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Combat\\CombatEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T10:18:14.837Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-11T10:18:14.837Z"
             }
           ]
         }

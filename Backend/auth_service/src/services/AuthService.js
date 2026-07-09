@@ -4,6 +4,44 @@ const jwt = require('jsonwebtoken');
 
 class AuthService {
   /**
+   * Signs in with email/password through Firebase Authentication, then runs the
+   * same verified-token login flow used by other clients.
+   */
+  async LoginWithEmail(email, password) {
+    const apiKey = process.env.FIREBASE_WEB_API_KEY;
+    if (!apiKey) throw new Error("Firebase Web API key is not configured.");
+
+    const response = await fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${encodeURIComponent(apiKey)}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, returnSecureToken: true })
+      }
+    );
+
+    const data = await response.json();
+    if (!response.ok || !data.idToken) {
+      const firebaseCode = data?.error?.message || '';
+      const friendlyErrors = {
+        INVALID_LOGIN_CREDENTIALS: 'Invalid email or password.',
+        EMAIL_NOT_FOUND: 'Invalid email or password.',
+        INVALID_PASSWORD: 'Invalid email or password.',
+        USER_DISABLED: 'This account has been disabled.',
+        TOO_MANY_ATTEMPTS_TRY_LATER: 'Too many attempts. Please try again later.'
+      };
+      throw new Error(friendlyErrors[firebaseCode] || 'Unable to sign in.');
+    }
+
+    const result = await this.Login(data.idToken);
+    return {
+      ...result,
+      refreshToken: data.refreshToken,
+      expiresIn: Number(data.expiresIn) || 3600
+    };
+  }
+
+  /**
    * Registers a new user using Firebase Admin SDK.
    * @param {string} email 
    * @param {string} password 
