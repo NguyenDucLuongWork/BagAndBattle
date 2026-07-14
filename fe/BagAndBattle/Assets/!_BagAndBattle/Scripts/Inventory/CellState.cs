@@ -3,5 +3,6 @@
     Disable,
     Empty,
     Occupied,
-    Required
+    Required,
+    Connectable
 }

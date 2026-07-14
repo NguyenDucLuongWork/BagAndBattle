@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0440ab91bf962a9459c615ef774e628b, type: 3}
+  m_Name: ItemDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDataSO
+  itemData:
+    id: 
+    name: 
+    description: 
+    sprite: {fileID: 0}
+    footprint:
+      cells: 000100
+      cellState: 
+      width: 1
+      height: 3
+    triggerSpeed: 1
+    damage: 0
+    heal: 0
+    shield: 0
+    connectableItems:
+    - 
