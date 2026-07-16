@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
+using Firebase;
+using Firebase.Auth;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,8 +10,7 @@ namespace BagAndBattle.UI
 {
     public class LoginUI : MonoBehaviour
     {
-        [Header("API")]
-        [SerializeField] private string authServiceUrl = "http://localhost:3000";
+        [Header("Navigation")]
         [SerializeField] private string nextSceneName = "SampleScene";
 
         [Header("UI References")]
@@ -20,25 +19,57 @@ namespace BagAndBattle.UI
         [SerializeField] private Button loginButton;
         [SerializeField] private TextMeshProUGUI messageText;
 
+        private FirebaseAuth auth;
+        private bool firebaseReady;
         private bool isSubmitting;
         private bool hasRuntimeLoginListener;
+        private bool isDestroyed;
 
-        private void Awake()
+        private async void Awake()
         {
             if (messageText == null) CreateMessageText();
+
             if (loginButton.onClick.GetPersistentEventCount() == 0)
             {
                 loginButton.onClick.AddListener(Login);
                 hasRuntimeLoginListener = true;
             }
+
             passwordInput.onSubmit.AddListener(OnPasswordSubmitted);
-            ShowMessage(string.Empty, Color.white);
+            SetSubmitting(true);
+            ShowMessage("Đang khởi tạo Firebase...", new Color(1f, 0.75f, 0.2f));
+
+            try
+            {
+                DependencyStatus status = await FirebaseApp.CheckAndFixDependenciesAsync();
+                if (isDestroyed) return;
+
+                if (status != DependencyStatus.Available)
+                {
+                    ShowMessage($"Không thể khởi tạo Firebase: {status}.", Color.red);
+                    return;
+                }
+
+                auth = FirebaseAuth.DefaultInstance;
+                firebaseReady = true;
+                ShowMessage(string.Empty, Color.white);
+                SetSubmitting(false);
+            }
+            catch (Exception exception)
+            {
+                if (isDestroyed) return;
+                Debug.LogException(exception);
+                ShowMessage("Không thể khởi tạo Firebase. Vui lòng thử lại.", Color.red);
+            }
         }
 
         private void OnDestroy()
         {
+            isDestroyed = true;
+
             if (hasRuntimeLoginListener)
                 loginButton.onClick.RemoveListener(Login);
+
             passwordInput.onSubmit.RemoveListener(OnPasswordSubmitted);
         }
 
@@ -47,9 +78,15 @@ namespace BagAndBattle.UI
             Login();
         }
 
-        public void Login()
+        public async void Login()
         {
             if (isSubmitting) return;
+
+            if (!firebaseReady || auth == null)
+            {
+                ShowMessage("Firebase chưa sẵn sàng. Vui lòng thử lại.", Color.red);
+                return;
+            }
 
             string email = emailInput.text.Trim();
             string password = passwordInput.text;
@@ -66,80 +103,79 @@ namespace BagAndBattle.UI
                 return;
             }
 
-            StartCoroutine(SendLoginRequest(email, password));
-        }
-
-        private IEnumerator SendLoginRequest(string email, string password)
-        {
             SetSubmitting(true);
             ShowMessage("Đang đăng nhập...", new Color(1f, 0.75f, 0.2f));
 
-            var payload = JsonUtility.ToJson(new LoginRequest
-            {
-                email = email,
-                password = password
-            });
-
-            string endpoint = authServiceUrl.TrimEnd('/') + "/api/auth/login";
-            using var request = new UnityWebRequest(endpoint, UnityWebRequest.kHttpVerbPOST);
-            request.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(payload));
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.timeout = 15;
-
-            yield return request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                ShowMessage(GetErrorMessage(request), Color.red);
-                SetSubmitting(false);
-                yield break;
-            }
-
-            LoginResponse response;
             try
             {
-                response = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+                AuthResult result = await auth.SignInWithEmailAndPasswordAsync(email, password);
+                if (isDestroyed) return;
+
+                FirebaseUser user = result.User;
+                if (user == null)
+                    throw new InvalidOperationException("Firebase did not return a user.");
+
+                string idToken = await user.TokenAsync(false);
+                if (isDestroyed) return;
+
+                AuthSession.Set(user.UserId, user.Email, idToken);
+                ShowMessage("Đăng nhập thành công!", new Color(0.2f, 0.8f, 0.3f));
+
+                if (!string.IsNullOrWhiteSpace(nextSceneName))
+                    SceneManager.LoadScene(nextSceneName);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                ShowMessage("Phản hồi đăng nhập không hợp lệ.", Color.red);
+                if (isDestroyed) return;
+
+                Debug.LogException(exception);
+                ShowMessage(GetErrorMessage(exception), Color.red);
                 SetSubmitting(false);
-                yield break;
             }
-
-            if (response == null || string.IsNullOrEmpty(response.token) || response.user == null)
-            {
-                ShowMessage("Auth service không trả về phiên đăng nhập.", Color.red);
-                SetSubmitting(false);
-                yield break;
-            }
-
-            AuthSession.Set(response.user.uid, response.user.email, response.token, response.refreshToken);
-            ShowMessage("Đăng nhập thành công!", new Color(0.2f, 0.8f, 0.3f));
-
-            if (!string.IsNullOrWhiteSpace(nextSceneName))
-                SceneManager.LoadScene(nextSceneName);
         }
 
-        private static string GetErrorMessage(UnityWebRequest request)
+        private static string GetErrorMessage(Exception exception)
         {
-            if (!string.IsNullOrWhiteSpace(request.downloadHandler?.text))
+            FirebaseException firebaseException = FindFirebaseException(exception);
+            if (firebaseException == null)
+                return "Đăng nhập thất bại. Vui lòng thử lại.";
+
+            switch ((AuthError)firebaseException.ErrorCode)
             {
-                try
+                case AuthError.InvalidEmail:
+                    return "Email không hợp lệ.";
+                case AuthError.WrongPassword:
+                case AuthError.UserNotFound:
+                case AuthError.InvalidCredential:
+                    return "Email hoặc mật khẩu không đúng.";
+                case AuthError.UserDisabled:
+                    return "Tài khoản này đã bị vô hiệu hóa.";
+                case AuthError.TooManyRequests:
+                    return "Quá nhiều lần đăng nhập. Vui lòng thử lại sau.";
+                case AuthError.NetworkRequestFailed:
+                    return "Không thể kết nối Firebase. Hãy kiểm tra mạng.";
+                default:
+                    return "Đăng nhập thất bại. Vui lòng thử lại.";
+            }
+        }
+
+        private static FirebaseException FindFirebaseException(Exception exception)
+        {
+            if (exception is FirebaseException firebaseException)
+                return firebaseException;
+
+            if (exception is AggregateException aggregateException)
+            {
+                foreach (Exception innerException in aggregateException.Flatten().InnerExceptions)
                 {
-                    var apiError = JsonUtility.FromJson<ApiError>(request.downloadHandler.text);
-                    if (!string.IsNullOrWhiteSpace(apiError?.error)) return apiError.error;
-                }
-                catch (Exception)
-                {
-                    // Fall back to the transport error below.
+                    FirebaseException match = FindFirebaseException(innerException);
+                    if (match != null) return match;
                 }
             }
 
-            return request.result == UnityWebRequest.Result.ConnectionError
-                ? "Không thể kết nối auth-service. Hãy kiểm tra server và URL."
-                : "Đăng nhập thất bại. Vui lòng thử lại.";
+            return exception.InnerException == null
+                ? null
+                : FindFirebaseException(exception.InnerException);
         }
 
         private void SetSubmitting(bool value)
@@ -171,59 +207,6 @@ namespace BagAndBattle.UI
             messageText.alignment = TextAlignmentOptions.Center;
             messageText.fontSize = 22f;
             messageText.textWrappingMode = TextWrappingModes.Normal;
-        }
-
-        [Serializable]
-        private class LoginRequest
-        {
-            public string email;
-            public string password;
-        }
-
-        [Serializable]
-        private class LoginResponse
-        {
-            public UserResponse user = null;
-            public string token = null;
-            public string refreshToken = null;
-        }
-
-        [Serializable]
-        private class UserResponse
-        {
-            public string uid = null;
-            public string email = null;
-        }
-
-        [Serializable]
-        private class ApiError
-        {
-            public string error = null;
-        }
-    }
-
-    public static class AuthSession
-    {
-        public static string UserId { get; private set; }
-        public static string Email { get; private set; }
-        public static string IdToken { get; private set; }
-        public static string RefreshToken { get; private set; }
-        public static bool IsAuthenticated => !string.IsNullOrEmpty(IdToken);
-
-        public static void Set(string userId, string email, string idToken, string refreshToken)
-        {
-            UserId = userId;
-            Email = email;
-            IdToken = idToken;
-            RefreshToken = refreshToken;
-        }
-
-        public static void Clear()
-        {
-            UserId = null;
-            Email = null;
-            IdToken = null;
-            RefreshToken = null;
         }
     }
 }
