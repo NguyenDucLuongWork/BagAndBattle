@@ -15,4 +15,6 @@ public class ItemData
     public int damage = 0;
     public int heal = 0;
     public int shield = 0;
+
+    public ItemEffectDataSO itemEffectDataSO;
 }

@@ -12,6 +12,8 @@ public partial class Item : MonoBehaviour
     public ItemVisual itemVisual { get; private set; }
     private Storable storable;
     private StorableVisual storableVisual;
+    private ProgressTimer progressTimer;
+    private ItemEffect itemEffect;
 
     public ItemData Data
     {
@@ -28,6 +30,10 @@ public partial class Item : MonoBehaviour
         itemVisual = GetComponentInChildren<ItemVisual>();
         storable = GetComponentInChildren<Storable>();
         storableVisual = GetComponentInChildren<StorableVisual>();
+        progressTimer = GetComponentInChildren<ProgressTimer>();
+        itemEffect = GetComponentInChildren<ItemEffect>();
+        itemEffect.SetData(Data.itemEffectDataSO.itemEffectData);
+
     }
 
     public void Start()
@@ -40,6 +46,8 @@ public partial class Item : MonoBehaviour
 
         index = Random.Range(0, itemDataHolderSO.itemDataList.Length);
         Init();
+
+
     }
 
     [ContextMenu("Init")]
@@ -62,6 +70,8 @@ public partial class Item : MonoBehaviour
             itemVisual.Init((RectTransform)this.transform, itemData);
         else
             Debug.LogWarning($"{name}: missing ItemVisual in children.");
+
+        progressTimer.Stop();
 
     }
 

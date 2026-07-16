@@ -10,7 +10,7 @@ public class CombatManager : MonoBehaviour
     [Header("Entities")]
     public PlayerEntity player;
     public MonsterEntity monster;
-
+    public List<MonsterEntit
     [Header("Settings")]
     public float gameSpeedMultiplier = 1f;
 

@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\itemdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\item\\itemdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\item.use.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\item\\item.use.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\dev_itemtester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\item\\dev_itemtester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\item\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,10 +43,6 @@
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\inventory\\inventorycell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\inventory\\ui\\storablevisual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\inventory\\ui\\storablevisual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -41,14 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Editor\\ItemDataSOEditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\!_BagAndBattle\\Scripts\\Item\\Editor\\ItemDataSOEditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\item.use.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\item\\item.use.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\itemdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\item\\itemdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\itemdataso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,10 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\ui\\itemvisual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\item\\ui\\itemvisual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\dev_itemtester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\!_bagandbattle\\scripts\\item\\dev_itemtester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\_luong\\studying\\gamedev\\bagandbattle\\bagandbattle\\fe\\bagandbattle\\assets\\!_bagandbattle\\scripts\\item\\use\\itemusebehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -142,56 +142,20 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Storable.cs",
-              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\Storable.cs",
-              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\Storable.cs",
-              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\Storable.cs",
-              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\Storable.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA0wJcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T08:24:04.806Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "Inventory.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\Inventory.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\Inventory.cs",
               "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\Inventory.cs",
               "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\Inventory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAUwBoAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T12:51:34.441Z"
+              "WhenOpened": "2026-06-11T12:51:34.441Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "InventoryCell.cs",
-              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryCell.cs",
-              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryCell.cs",
-              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryCell.cs",
-              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryCell.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T08:26:26.335Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "InventoryGridVisual.cs",
-              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\InventoryGridVisual.cs",
-              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\InventoryGridVisual.cs",
-              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\InventoryGridVisual.cs",
-              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\InventoryGridVisual.cs",
-              "ViewState": "AgIAALsAAAAAAAAAAAAkwMEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T10:41:05.404Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "StorableVisual.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\StorableVisual.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\StorableVisual.cs",
@@ -203,7 +167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "CellVisual.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\CellVisual.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\CellVisual.cs",
@@ -215,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Item.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Item.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\Item.cs",
@@ -228,7 +192,82 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "Dev_ItemTester.cs",
+              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Dev_ItemTester.cs",
+              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\Dev_ItemTester.cs",
+              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Dev_ItemTester.cs",
+              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Item\\Dev_ItemTester.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAUwBQAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T10:22:17.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Item.Use.cs",
+              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Item.Use.cs",
+              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\Item.Use.cs",
+              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Item.Use.cs",
+              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Item\\Item.Use.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T16:25:31.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ItemData.cs",
+              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\ItemData.cs",
+              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\ItemData.cs",
+              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\ItemData.cs",
+              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Item\\ItemData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T10:08:55.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "InventoryGridVisual.cs",
+              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\InventoryGridVisual.cs",
+              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\InventoryGridVisual.cs",
+              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\InventoryGridVisual.cs",
+              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\UI\\InventoryGridVisual.cs",
+              "ViewState": "AgIAALsAAAAAAAAAAAAkwMEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T10:41:05.404Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "InventoryCell.cs",
+              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryCell.cs",
+              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryCell.cs",
+              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryCell.cs",
+              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryCell.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T08:26:26.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Storable.cs",
+              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\Storable.cs",
+              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\Storable.cs",
+              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\Storable.cs",
+              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\Storable.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAA0wJcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T08:24:04.806Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "StorableFootprint.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\StorableFootprint.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\StorableFootprint.cs",
@@ -240,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "CellState.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\CellState.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\CellState.cs",
@@ -252,7 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "ItemDataSOEditor.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Editor\\ItemDataSOEditor.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\Editor\\ItemDataSOEditor.cs",
@@ -263,19 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Item.Use.cs",
-              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Item.Use.cs",
-              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\Item.Use.cs",
-              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Item.Use.cs",
-              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Item\\Item.Use.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-09T16:25:31.32Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ItemDataSO.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\ItemDataSO.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\ItemDataSO.cs",
@@ -287,19 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ItemData.cs",
-              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\ItemData.cs",
-              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\ItemData.cs",
-              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\ItemData.cs",
-              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Item\\ItemData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T10:08:55.926Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "ItemDataHolderSO.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\ItemDataHolderSO.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\ItemDataHolderSO.cs",
@@ -311,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Item.InventoryRelated.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Item.InventoryRelated.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\Item.InventoryRelated.cs",
@@ -323,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "InventoryGrid.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryGrid.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\InventoryGrid.cs",
@@ -335,7 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "StoredObject.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Inventory\\StoredObject.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Inventory\\StoredObject.cs",
@@ -347,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "ItemVisual.cs",
               "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\UI\\ItemVisual.cs",
               "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\UI\\ItemVisual.cs",
@@ -356,18 +371,6 @@
               "ViewState": "AgIAAGUAAAAAAAAAAAASwBgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-12T10:09:45.966Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Dev_ItemTester.cs",
-              "DocumentMoniker": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Dev_ItemTester.cs",
-              "RelativeDocumentMoniker": "Assets\\!_BagAndBattle\\Scripts\\Item\\Dev_ItemTester.cs",
-              "ToolTip": "C:\\_Luong\\Studying\\GameDev\\BagAndBattle\\BagAndBattle\\fe\\BagAndBattle\\Assets\\!_BagAndBattle\\Scripts\\Item\\Dev_ItemTester.cs",
-              "RelativeToolTip": "Assets\\!_BagAndBattle\\Scripts\\Item\\Dev_ItemTester.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAUwBQAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T10:22:17.093Z"
             },
             {
               "$type": "Document",
