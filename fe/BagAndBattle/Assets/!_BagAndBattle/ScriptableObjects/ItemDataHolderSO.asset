@@ -25,6 +25,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 11400000, guid: 294b02f8dada22348926bdb10bcd33d7, type: 2}
   - id: Helmet
     name: Helmet
     description: To protect your head
@@ -37,6 +38,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 0}
   - id: 
     name: 
     description: 
@@ -49,6 +51,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 11400000, guid: 2d53974af6af9b14691f61279e278779, type: 2}
   - id: 
     name: 
     description: 
@@ -61,6 +64,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 11400000, guid: b92e38eb521e5c6468889f0ffad41641, type: 2}
   - id: Sword
     name: Sword
     description: A sharp weapon
@@ -73,6 +77,7 @@ MonoBehaviour:
     damage: 5
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 11400000, guid: 294b02f8dada22348926bdb10bcd33d7, type: 2}
   - id: Shield
     name: Shield
     description: A protective shield
@@ -85,6 +90,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 4
+    itemEffectDataSO: {fileID: 11400000, guid: 294b02f8dada22348926bdb10bcd33d7, type: 2}
   - id: Axe
     name: Axe
     description: A heavy axe
@@ -97,6 +103,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 0}
   - id: Bow
     name: Bow
     description: An ancient bow
@@ -109,6 +116,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 11400000, guid: 2d53974af6af9b14691f61279e278779, type: 2}
   - id: Potion
     name: Potion
     description: A healing potion
@@ -121,6 +129,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 11400000, guid: 2d53974af6af9b14691f61279e278779, type: 2}
   - id: Scroll
     name: Scroll
     description: An ancient scroll
@@ -133,6 +142,7 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 11400000, guid: 2d53974af6af9b14691f61279e278779, type: 2}
   - id: Armor
     name: Armor
     description: A piece of armor
@@ -145,3 +155,4 @@ MonoBehaviour:
     damage: 0
     heal: 0
     shield: 0
+    itemEffectDataSO: {fileID: 11400000, guid: b92e38eb521e5c6468889f0ffad41641, type: 2}

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: ItemEffectDataSO 1
   m_EditorClassIdentifier: Assembly-CSharp::ItemEffectDataSO
   itemEffectData:
-    itemEffectSprite: {fileID: 0}
-    effects: []
+    itemEffectSprite: {fileID: 4017245168782585072, guid: 0bdfee78e2d65f74d8bf531dd5ff1a06, type: 3}
+    effects:
+    - itemEffectType: 0
+      value: 4

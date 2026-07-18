@@ -32,7 +32,6 @@ public partial class Item : MonoBehaviour
         storableVisual = GetComponentInChildren<StorableVisual>();
         progressTimer = GetComponentInChildren<ProgressTimer>();
         itemEffect = GetComponentInChildren<ItemEffect>();
-        itemEffect.SetData(Data.itemEffectDataSO.itemEffectData);
 
     }
 
@@ -45,6 +44,8 @@ public partial class Item : MonoBehaviour
         }
 
         index = Random.Range(0, itemDataHolderSO.itemDataList.Length);
+        progressTimer.Stop();
+
         Init();
 
 
@@ -70,8 +71,8 @@ public partial class Item : MonoBehaviour
             itemVisual.Init((RectTransform)this.transform, itemData);
         else
             Debug.LogWarning($"{name}: missing ItemVisual in children.");
+        itemEffect.SetData(Data.itemEffectDataSO.itemEffectData);
 
-        progressTimer.Stop();
 
     }
 
